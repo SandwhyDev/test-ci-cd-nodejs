@@ -29,6 +29,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          # cd $GITHUB_WORKSPACE  # ✅ Masuk ke direktori proyek
           docker build -t ${{ env.IMAGE_NAME }}:latest .
           docker push ${{ env.IMAGE_NAME }}:latest
