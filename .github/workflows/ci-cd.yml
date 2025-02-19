@@ -22,18 +22,13 @@ jobs:
         run: echo "No tests yet"
 
       - name: Set up environment variables
-        run: echo "IMAGE_NAME=sandwhydev@gmail.com/my-node-app" >> $GITHUB_ENV
-
-      - name: Ensure Docker Daemon is Running
-        run: sudo chmod 666 /var/run/docker.sock
-
-      - name: mau ngecek dah
-        run: echo "oit ${{ env.IMAGE_NAME }}"
+        run: echo "IMAGE_NAME=sandwhydev/my-node-app" >> $GITHUB_ENV # ✅ Pakai username Docker Hub
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image
         run: |
+          cd $GITHUB_WORKSPACE  # ✅ Masuk ke direktori proyek
           docker build -t ${{ env.IMAGE_NAME }}:latest .
           docker push ${{ env.IMAGE_NAME }}:latest
