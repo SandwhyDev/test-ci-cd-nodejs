@@ -22,7 +22,7 @@ jobs:
         run: echo "No tests yet"
 
       - name: Set up environment variables
-        run: echo "IMAGE_NAME=mydockerhubusername/my-node-app" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/my-node-app" >> $GITHUB_ENV
 
       - name: Ensure Docker Daemon is Running
         run: sudo chmod 666 /var/run/docker.sock
