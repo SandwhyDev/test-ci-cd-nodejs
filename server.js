@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello CI/CD with Node.js! dan ini edited");
+  res.send("Hello CI/CD with Node.js! ini");
 });
 
 const PORT = process.env.PORT || 3000;
