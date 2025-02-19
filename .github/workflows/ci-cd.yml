@@ -1,0 +1,25 @@
+name: CI/CD for Node.js App
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests (Opsional)
+        run: echo "No tests yet"
+
+      - name: Build Docker Image
+        run: docker build -t my-node-app .
