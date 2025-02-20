@@ -1,6 +1,11 @@
 name: CI/CD for Node.js App
 
-on: [push]
+# berjalan di branch tertentu
+on:
+  push:
+    branches:
+      - main
+      - develop
 
 jobs:
   build:
