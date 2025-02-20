@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("done deploy");
+  res.send("hapus secret docker password");
 });
 
 const PORT = process.env.PORT || 3000;
