@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: self-hosted # Menggunakan self-hosted runner
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
           docker push ${{ env.IMAGE_NAME }}:latest
 
   deploy:
-    runs-on: self-hosted # Menggunakan self-hosted runner
+    runs-on: self-hosted
     needs: build
     steps:
       - name: Test SSH Connection
@@ -40,9 +40,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy to VM
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            docker image prune -f
+      - name: Pull Latest Docker Image
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker pull ${{ env.IMAGE_NAME }}:latest"
 
-          EOF
+      - name: Prune Unused Docker Images
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker image prune -f"
+
+      - name: Run New Container
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker run -d --name my-node-app -p 3000:3000 ${{ env.IMAGE_NAME }}:latest"
