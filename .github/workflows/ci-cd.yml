@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Set up environment variables
-        run: echo "IMAGE_NAME=sandwhydev/my-node-app" >> $GITHUB_ENV # ✅ Pakai username Docker Hub
+        run: echo "IMAGE_NAME=sandyiswahyudi/my-node-app" >> $GITHUB_ENV # ✅ Pakai username Docker Hub=
 
       - name: Logout from Docker Hub (prevent conflicts)
         run: docker logout
