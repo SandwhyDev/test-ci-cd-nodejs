@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("ci / cd with githuhb actions & deploy");
+  res.send("ci / cd with github actions & deploy");
 });
 
 const PORT = process.env.PORT || 3000;
