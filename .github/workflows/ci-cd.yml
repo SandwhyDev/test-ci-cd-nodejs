@@ -46,5 +46,11 @@ jobs:
       - name: Prune Unused Docker Images
         run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker image prune -f"
 
+      - name: Stop Old Container
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker stop my-node-app"
+
+      - name: Remove Old Container
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker rm my-node-app"
+
       - name: Run New Container
         run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker run -d --name my-node-app -p 3000:3000 ${{ secrets.IMAGE_NAME }}:latest"
