@@ -43,9 +43,6 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            docker pull ${{ env.IMAGE_NAME }}:latest
             docker image prune -f
-            docker stop my-node-app
-            docker rm my-node-app
-            docker run -d --name my-node-app -p 3000:3000 ${{ env.IMAGE_NAME }}:latest
+
           EOF
