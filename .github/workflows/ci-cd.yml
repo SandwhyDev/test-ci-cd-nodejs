@@ -21,9 +21,6 @@ jobs:
       - name: Set up environment variables
         run: echo "IMAGE_NAME=sandyiswahyudi/my-node-app" >> $GITHUB_ENV # ✅ Pakai username Docker Hub=
 
-      - name: Logout from Docker Hub (prevent conflicts)
-        run: docker logout
-
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
